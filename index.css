@@ -230,46 +230,6 @@ tbody tr:hover {
     background-color: #1a2233;
 }
 
-/* =========================
-   FORMULÁRIO
-========================= */
-
-form {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-input, select, textarea {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    background-color: #0b0f1a;
-    color: #e6edf3;
-    font-size: 16px;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-}
-
-input[type="submit"] {
-    background-color: #3b82f6;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #2563eb;
-}
 
 /* =========================
    FOOTER
@@ -286,6 +246,7 @@ footer {
 footer p {
     color: #94a3b8;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 address a {
