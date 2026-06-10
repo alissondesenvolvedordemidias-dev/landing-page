@@ -1,46 +1,360 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alisson.M</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Onevision1ture</title>
+    
+    <style>
+        /* =========================
+           RESET
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* =========================
+           BODY GRID MASTER
+        ========================= */
+        body {
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            background-color: #0b0f1a;
+            color: #e6edf3;
+            line-height: 1.8;
+
+            min-height: 100vh;
+            display: grid;
+
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "header"
+                "main"
+                "footer";
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+        header {
+            grid-area: header;
+            background-color: #0b0f1a;
+            padding: 25px 10%;
+            border-bottom: 1px solid rgba(48, 183, 172, 0.2); 
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #30b7ac; 
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff9f1c; 
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+        main {
+            grid-area: main;
+        }
+
+        /* =========================
+           SEÇÕES PADRÃO
+        ========================= */
+        section {
+            padding: 120px 10%;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        section h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #30b7ac; 
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        section p {
+            max-width: 900px;
+            margin: 40px auto 0;
+            font-size: 18px;
+            color: #cbd5e1;
+            text-align: justify;
+        }
+
+        /* =========================
+           SOBRE
+        ========================= */
+        #sobre {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            justify-items: center;
+        }
+
+        #sobre img {
+            width: 220px;
+            border-radius: 50%;
+            border: 3px solid #30b7ac; 
+            box-shadow: 0 0 30px rgba(48, 183, 172, 0.3); 
+        }
+
+        /*CARD MAIS LARGO HABILIDADES*/
+        #sobre aside {
+            background-color: #111827;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(48, 183, 172, 0.15); 
+            width: 100%;
+            max-width: 900px;
+        }
+
+        aside h3 {
+            margin-bottom: 25px;
+            color: #30b7ac; 
+        }
+
+        aside ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            padding: 0;
+        }
+
+        aside li {
+            background: rgba(48, 183, 172, 0.08); 
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(48, 183, 172, 0.2);
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        aside li:hover {
+            transform: translateY(-5px);
+            background: rgba(48, 183, 172, 0.15);
+        }
+
+        /* =========================
+           PROJETOS
+        ========================= */
+        #projeto {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            max-width: 1100px;
+            margin: 0 auto; 
+        }
+
+        #projeto article {
+            background-color: #111827;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(48, 183, 172, 0.15); 
+            transition: 0.3s ease;
+        }
+
+        #projeto article:hover {
+            transform: translateY(-6px);
+            border-color: #ff9f1c; 
+            box-shadow: 0 10px 30px rgba(255, 159, 28, 0.15); 
+        }
+
+        #projeto article p {
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           TABELA
+        ========================= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #111827;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(48, 183, 172, 0.15);
+        }
+
+        thead {
+            background-color: #1e293b;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            color: #30b7ac; 
+            font-weight: 600;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(48, 183, 172, 0.1);
+        }
+
+        tbody tr:hover {
+            background-color: #1a2233;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            grid-area: footer;
+            background-color: #0b0f1a;
+            padding: 60px 10%;
+            border-top: 1px solid rgba(48, 183, 172, 0.2);
+            text-align: center;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        address a {
+            color: #30b7ac; 
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        address a:hover {
+            color: #ff9f1c; 
+            text-decoration: underline;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================= */
+        @media (max-width: 1024px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            section {
+                padding: 80px 8%;
+            }
+
+            section p {
+                text-align: left;
+            }
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 30% 30%, rgba(48,183,172,0.10), transparent 40%),
+                        radial-gradient(circle at 70% 70%, rgba(48,183,172,0.08), transparent 40%);
+            animation: moveBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
     <header>
-        <h1>Alisson Machado</h1>
+        <img src="Design sem nome (3).png" alt="logo Alisson Machado" class="logo">
         <nav>
             <ul>
                 <li><a href="#sobre">Sobre mim</a></li>
-                <li><a href="#projeto">Projetos</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#serviços">Habilidades</a></li>
                 <li><a href="#contato">Contatos</a></li>
             </ul> 
         </nav>
     </header>
 
-    <!-- MAIN -->
     <main>
 
-        <!-- SOBRE -->
         <section id="sobre">
             
             <div class="conteudo">
-                <h2>Sobre mim</h2>
+                <h2>Sobre</h2>
 
                 <p>
-                    Me chamo Alisson, sou desenvolvedor junior e esse é um dos meus primeiros projetos.
+                    Imagine contar com um parceiro estratégico que une a mente analítica capaz de escalar campanhas complexas, a visão artística que cria anúncios impossíveis de ignorar e a lógica técnica que constrói o ambiente perfeito de conversão.
+
+Nós não acreditamos em marketing fragmentado. A nossa essência é transformar dados brutos em resultados financeiros sólidos, integrando a gestão estratégica de tráfego pago à produção de conteúdo visual de altíssimo impacto.
+
+Nós sabemos que o marketing digital não para no clique do anúncio. É por isso que a nossa visão engloba a dominação do funil completo. Integramos competências avançadas de desenvolvimento Front-end — unindo HTML, CSS, JavaScript e automação — para garantir que a experiência do seu usuário seja tão impecável quanto a sua oferta.
+                </p>
+
+                <p>
+
+Os Nossos Pilares de Atuação:
+
+Alta Performance Analítica: Gestão de tráfego pago baseada em dados reais, otimização de orçamento e foco cirúrgico no ROI (Retorno sobre o Investimento).
+
+Design e Impacto Visual: Produção de criativos e campanhas que rompem o padrão de rolagem e conectam a sua marca diretamente com a dor e o desejo do seu público.
+
+Engenharia de Conversão: Desenvolvimento web e estruturação de landing pages de alta velocidade, aliando tecnologia e programação para blindar o seu funil de vendas e evitar a perda de leads.
+
+Com uma metodologia validada por projetos em empresas de ponta, como IDES, OMD Soluções e Grupo VAMO, a nossa promessa é clara: nós não apenas lemos o cenário digital — nós o desenhamos, o anunciamos e o programamos. Tudo isso com um único objetivo central: a sua conversão.
                 </p>
             </div>
-
-            <img 
-                src="https://media.licdn.com/dms/image/v2/D4D03AQHuwmeYuut-bw/profile-displayphoto-crop_800_800/B4DZyUF6G3GQAI-/0/1772011103934?e=1773878400&v=beta&t=u_c8iO7Y4ya4cQtXDUi5_Mqd5t-NumLT_K4ysBQEeEM" 
-                alt="Foto de Alisson Machado"
-            >
 
             <aside>
                 <h3>Habilidades</h3>
@@ -48,26 +362,17 @@
                     <li>HTML</li>
                     <li>CSS</li>
                     <li>JavaScript</li>
+                    <li>Google Ads</li>
+                    <li>Meta Ads | YouTube Ads</li>
+                    <li>Tiktok Ads | LinkedIn Ads</li>
+                    <li>Gerenciamento de Redes Sociais</li>
+                    <li>Captação e Edição de Vídeo</li>
                 </ul>
             </aside>
 
         </section>
 
-       <section>
-
-            <article>
-                <h3>Portfólio</h3>
-
-                <p>
-                    Após 4 anos atuando na linha de frente do marketing de performance e design, decidi dar o próximo passo: construir as ferramentas que eu costumava gerenciar. Este projeto marca minha transição para o desenvolvimento web.
-                </p>
-              
-            </article>
-
-        </section>
-
-        <!-- HABILIDADES -->
-        <section id="habilidades">
+        <section id="serviços">
             
             <h2>Habilidades e tecnologias</h2>
 
@@ -75,7 +380,6 @@
                 <thead>
                     <tr>
                         <th>Tecnologia</th>
-                        <th>Nível</th>
                         <th>Descrição</th>
                     </tr>
                 </thead>
@@ -83,20 +387,27 @@
                 <tbody> 
                     <tr>
                         <td>HTML</td>
-                        <td>Iniciante</td>
                         <td>Capaz de construir estruturas de páginas web semânticas e responsivas.</td>
                     </tr>
 
                     <tr>
                         <td>CSS</td>
-                        <td>Intermediário</td>
                         <td>Experiência com flexbox, grid e animações CSS.</td>
                     </tr>
 
                     <tr>
                         <td>JavaScript</td>
-                        <td>Básico</td>
                         <td>Desenvolvimento de scripts do lado do cliente para interações.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tráfego Pago</td>
+                        <td>Desenvolvimento de campanhas em Alta Performance</td>
+                    </tr>
+
+                    <tr>
+                        <td>Captação e Edição de Vídeo | Gerenciamento de redes</td>
+                        <td>Edições que chamam a atenção, resultados de alta performance nas redes sociais. </td>
                     </tr>
                 </tbody>
             </table>
@@ -105,16 +416,10 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer>
-
-        <p>© 2026 Alisson Machado. Todos os direitos reservados.</p>
-
-        <section id="contato">
+        <section id="contato" style="padding: 0; text-align: center;">
             <h2>Contatos</h2>
-
             <p>Tem um projeto em mente? Entre em contato.</p>
-
             <address>
                 E-mail: 
                 <a href="mailto:alissondesenvolvedordemidias@gmail.com">
@@ -127,39 +432,31 @@
                 </a>
             </address>
         </section>
-
+        
+        <p style="margin-top: 40px;">© 2026 Alisson Machado. Todos os direitos reservados.</p>
     </footer>
 
     <div id="particles-js"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-<script>
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80 },
-    size: { value: 3 },
-    color: { value: "#3b82f6" },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#3b82f6",
-      opacity: 0.4,
-      width: 1
-    },
-    move: { enable: true, speed: 2 }
-  }
-});
-</script>
-
-</footer>
-
-    <script src="index.js"></script>
-
-    <div id="particles-js"></div>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <script>
-        // sua configuração do particles...
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 80 },
+            size: { value: 3 },
+            color: { value: "#30b7ac" }, /* Cor atualizada para turquesa */
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#30b7ac", /* Cor atualizada para turquesa */
+              opacity: 0.4,
+              width: 1
+            },
+            move: { enable: true, speed: 2 }
+          }
+        });
     </script>
+    <script src="index.js"></script>
 
 </body>
 </html>
