@@ -1,0 +1,352 @@
+/* =========================
+   PALETA DE CORES (:root)
+========================= */
+:root {
+    --bg-principal: #1E1E24;        /* Fundo escuro imersivo */
+    --texto-principal: #FFF8F0;     /* Off-white (Branco Quente) */
+    --texto-secundario: #d6d1cb;    /* Cinza claro para parágrafos */
+    --cor-destaque: #92140C;        /* Vermelho carmesim para CTAs e detalhes */
+    
+    /* Cores auxiliares baseadas na paleta */
+    --bg-cards: #2A2A33;            /* Fundo para artigos, asides e tabelas */
+    --bg-cards-hover: #353541;      /* Hover sutil para interações */
+    --borda-sutil: rgba(146, 20, 12, 0.3); /* Linhas de divisão com toque de vermelho */
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Compensa a altura do header fixo */
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg-principal);
+    color: var(--texto-principal);
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================
+   FUNDO ANIMADO
+========================= */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+
+    background:
+        radial-gradient(circle at 30% 30%, rgba(146, 20, 12, 0.10), transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(146, 20, 12, 0.05), transparent 40%);
+
+    animation: rotateBg 25s linear infinite;
+    z-index: -2;
+}
+
+@keyframes rotateBg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* =========================
+   PARTICLES
+========================= */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: rgba(30, 30, 36, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borda-sutil);
+    z-index: 999;
+}
+
+.logo {
+    width: 170px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto-principal);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--cor-destaque);
+}
+
+/* =========================
+   HERO
+========================= */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 10%;
+}
+
+#hero h1 {
+    font-size: clamp(3rem, 7vw, 5rem);
+    color: var(--texto-principal);
+    margin-bottom: 20px;
+}
+
+#hero h2 {
+    font-size: 1.4rem;
+    max-width: 900px;
+    color: var(--texto-secundario);
+    margin-bottom: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--texto-principal);
+    background: var(--cor-destaque);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    background-color: #a7180f; /* Tom levemente mais claro no hover */
+    box-shadow: 0 10px 25px rgba(146, 20, 12, 0.4);
+}
+
+/* =========================
+   SEÇÕES PADRÃO
+========================= */
+section {
+    padding: 100px 10%;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    position: relative;
+    color: var(--texto-principal);
+}
+
+section h2::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: var(--cor-destaque);
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+section p {
+    color: var(--texto-secundario);
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   SOBRE E BOX DE DESTAQUE
+========================= */
+#sobre {
+    max-width: 1200px;
+    margin: auto;
+}
+
+#saudacao {
+    color: var(--cor-destaque);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.box-destaque {
+    background: var(--bg-cards);
+    border-radius: 18px;                  /* Pontas curvadas/arredondadas */
+    padding: 45px;                        /* Espaçamento interno para o texto respirar */
+    margin: 40px auto;                    /* Centraliza e afasta dos elementos vizinhos */
+    max-width: 950px;                     /* Limita a largura para garantir uma excelente leitura */
+    border: 1px solid rgba(146, 20, 12, 0.2); /* Borda sutil com toque carmesim */
+    
+    /* Sombra multicamada profunda e com brilho sutil do tema */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4), 
+        0 5px 15px rgba(146, 20, 12, 0.15); 
+        
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box-destaque:hover {
+    transform: translateY(-2px);
+    border-color: var(--cor-destaque);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5), 
+        0 8px 20px rgba(146, 20, 12, 0.25);
+}
+
+.box-destaque p {
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+.box-destaque p:last-child {
+    margin-bottom: 0; /* Mantém o espaçamento perfeito no final do card */
+}
+
+
+/* =========================
+   TABELA
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--bg-cards);
+}
+
+thead {
+    background: var(--cor-destaque);
+}
+
+th, td {
+    padding: 18px;
+    text-align: left;
+}
+
+th {
+    color: var(--texto-principal);
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(255, 248, 240, 0.08);
+}
+
+tbody tr:hover {
+    background: var(--bg-cards-hover);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    text-align: center;
+    padding: 80px 10%;
+    border-top: 1px solid var(--borda-sutil);
+}
+
+footer h2 {
+    margin-bottom: 20px;
+    color: var(--texto-principal);
+}
+
+footer a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: var(--texto-principal);
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 40px;
+    color: rgba(255, 248, 240, 0.5);
+}
+
+/* =========================
+   ANIMAÇÕES (JS Observer)
+========================= */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 5%;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 3rem;
+    }
+
+    #hero h2 {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 80px 8%;
+    }
+
+    .box-destaque {
+        padding: 30px 20px; /* Reduz o espaçamento interno em celulares */
+        margin: 20px auto;
+    }
+}

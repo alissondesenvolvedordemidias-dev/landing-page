@@ -1,90 +1,80 @@
 // Espera o conteúdo do HTML carregar totalmente antes de rodar o script
-// Isso é uma camada extra de segurança, mesmo colocando o script no final do body.
 document.addEventListener('DOMContentLoaded', () => {
 
     // ======================================================
-    // FUNCIONALIDADE 1: SAUDAÇÃO DINÂMICA (Bom dia/Tarde/Noite)
+    // FUNCIONALIDADE 1: SAUDAÇÃO DINÂMICA
     // ======================================================
-    
-    // 1. Pegamos a hora atual do sistema
     const horaAtual = new Date().getHours();
     let saudacao;
 
-    // 2. Definimos a mensagem baseada na hora usando if/else
     if (horaAtual >= 5 && horaAtual < 12) {
         saudacao = "Bom dia!";
     } else if (horaAtual >= 12 && horaAtual < 18) {
         saudacao = "Boa tarde!";
     } else {
-        // Cobre a noite e a madrugada
         saudacao = "Boa noite!";
     }
 
-    // 3. Selecionamos o parágrafo onde queremos inserir a mensagem.
-    // Usamos o seletor CSS: dentro da section #sobre, a div .conteudo, o parágrafo p.
-    const paragrafoSobre = document.querySelector('#sobre .conteudo p');
-
-    // 4. Se o parágrafo existir, adicionamos a saudação no início do texto dele.
-    if (paragrafoSobre) {
-        // Pegamos o texto atual e colocamos a saudação na frente.
-        const textoOriginal = paragrafoSobre.innerText;
-        paragrafoSobre.innerText = `${saudacao} ${textoOriginal}`;
+    // Procura o elemento dedicado para a saudação conforme o CSS
+    const elementoSaudacao = document.getElementById('saudacao');
+    
+    if (elementoSaudacao) {
+        elementoSaudacao.innerText = saudacao;
+    } else {
+        // Fallback: Caso o elemento id="saudacao" não exista, injeta no primeiro parágrafo do sobre
+        const paragrafoSobre = document.querySelector('#sobre .conteudo p');
+        if (paragrafoSobre) {
+            const textoOriginal = paragrafoSobre.innerHTML;
+            paragrafoSobre.innerHTML = `<strong>${saudacao}</strong> ${textoOriginal}`;
+        }
     }
 
 
     // ======================================================
-    // FUNCIONALIDADE 2: NAVEGAÇÃO SUAVE (SMOOTH SCROLL)
+    // FUNCIONALIDADE 2: ANIMAÇÃO AO ROLAR A PÁGINA (Intersection Observer)
     // ======================================================
+    // Seleciona todos os elementos que possuem a classe .hidden no HTML
+    const elementosEscondidos = document.querySelectorAll('.hidden');
 
-    // 1. Selecionamos todos os links que estão dentro da navegação (nav ul li a)
-    // querySelectorAll retorna uma lista de elementos (como se fosse um array)
-    const linksNavegacao = document.querySelectorAll('nav ul li a');
+    const observerOpcoes = {
+        root: null,         // Usa a janela do navegador como referência
+        threshold: 0.15,    // Dispara a animação quando 15% do elemento estiver visível
+        rootMargin: "0px"
+    };
 
-    // 2. Para cada link encontrado na lista...
-    linksNavegacao.forEach(link => {
-        // ...adicionamos um "ouvinte" para o evento de clique.
-        link.addEventListener('click', (event) => {
-            // Impede o comportamento padrão do link (que é pular seco para a seção)
-            event.preventDefault();
-
-            // Pega o valor do href do link clicado (ex: "#projetos")
-            const idAlvo = link.getAttribute('href');
-            
-            // Seleciona a seção correspondente a esse ID na página
-            const secaoAlvo = document.querySelector(idAlvo);
-
-            // Se a seção existir, faz a rolagem suave até ela
-            if (secaoAlvo) {
-                secaoAlvo.scrollIntoView({
-                    behavior: 'smooth', // Define o comportamento como suave
-                    block: 'start'      // Alinha o topo da seção com o topo da janela
-                });
+    const secaoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // Se o elemento entrou na tela, adiciona a classe .show para animar
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                // Opcional: Remova o comentário da linha abaixo se quiser que a animação ocorra apenas uma vez
+                // observer.unobserve(entry.target);
             }
         });
-    });
+    }, observerOpcoes);
+
+    // Vincula o observador a cada elemento escondido
+    elementosEscondidos.forEach(elemento => secaoObserver.observe(elemento));
 
 
     // ======================================================
     // FUNCIONALIDADE 3: CONTROLE DE ENVIO DO FORMULÁRIO
     // ======================================================
-
-    // 1. Selecionamos o formulário dentro da seção de contato
     const formulario = document.querySelector('#contato form');
 
-    // 2. Se o formulário existir na página...
     if (formulario) {
-        // ...adicionamos um ouvinte para o evento 'submit' (quando clica no botão enviar)
         formulario.addEventListener('submit', (event) => {
-            // O MAIS IMPORTANTE: Impede a página de recarregar!
+            // Impede a página de recarregar
             event.preventDefault();
 
-            // Captura o valor que o usuário digitou no campo nome, só para usar na mensagem.
-            const nomeUsuario = document.getElementById('nome').value;
+            // Captura o campo de nome de forma segura
+            const campoNome = document.getElementById('nome');
+            const nomeUsuario = campoNome ? campoNome.value : 'visitante';
 
-            // Mostra um alerta na tela (simulando um envio com sucesso)
+            // Exibe o feedback visual de sucesso
             alert(`Obrigado, ${nomeUsuario}! Esta é uma simulação de envio. Em breve esta funcionalidade estará ativa.`);
 
-            // Limpa os campos do formulário após o "envio"
+            // Limpa todos os campos do formulário
             formulario.reset();
         });
     }
